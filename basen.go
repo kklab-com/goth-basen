@@ -18,7 +18,7 @@ type Encoding struct {
 }
 
 // NewSafeEncoding
-// to prevent error when data with '0x00' prefix
+// to prevent error when data with '0x00' prefix, it will add '0x01' to head before encoding
 func NewSafeEncoding(encoder string) *Encoding {
 	return NewEncoding(encoder).Safe(true)
 }
