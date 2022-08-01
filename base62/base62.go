@@ -8,5 +8,5 @@ const (
 
 var SafeEncoding = baseN.NewSafeEncoding(StdEncode)
 var SafeFlipEncoding = baseN.NewSafeEncoding(StdEncode).Flip(true)
-var ShiftEncoding = baseN.NewEncoding(StdEncode).Shift(true)
-var FlipShiftEncoding = baseN.NewEncoding(StdEncode).Shift(true).Flip(true)
+var SafeShiftEncoding = baseN.NewSafeEncoding(StdEncode).Shift(true)
+var SafeFlipShiftEncoding = baseN.NewSafeEncoding(StdEncode).Shift(true).Flip(true)
