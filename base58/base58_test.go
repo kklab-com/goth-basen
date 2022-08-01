@@ -30,16 +30,18 @@ func TestBase58(t *testing.T) {
 	assert.Equal(t, data, safe.DecodeString(safe.EncodeToString(data)))
 
 	wg := sync.WaitGroup{}
-	for i := 0; i < 256; i++ {
-		d := []byte(random(i))
-		wg.Add(1)
-		go func(i int) {
-			assert.Equal(t, d, SafeEncoding.DecodeString(SafeEncoding.EncodeToString(d)))
-			assert.Equal(t, d, BTCEncoding.DecodeString(BTCEncoding.EncodeToString(d)))
-			assert.Equal(t, d, FlickrEncoding.DecodeString(FlickrEncoding.EncodeToString(d)))
-			assert.Equal(t, d, RippleEncoding.DecodeString(RippleEncoding.EncodeToString(d)))
-			wg.Done()
-		}(i)
+	for c := 0; c < 10; c++ {
+		for i := 0; i < 256; i++ {
+			d := []byte(random(i))
+			wg.Add(1)
+			go func(i int) {
+				assert.Equal(t, d, SafeEncoding.DecodeString(SafeEncoding.EncodeToString(d)))
+				assert.Equal(t, d, BTCEncoding.DecodeString(BTCEncoding.EncodeToString(d)))
+				assert.Equal(t, d, FlickrEncoding.DecodeString(FlickrEncoding.EncodeToString(d)))
+				assert.Equal(t, d, RippleEncoding.DecodeString(RippleEncoding.EncodeToString(d)))
+				wg.Done()
+			}(i)
+		}
 	}
 
 	wg.Wait()

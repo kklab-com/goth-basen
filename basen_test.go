@@ -13,16 +13,18 @@ import (
 func TestBaseN(t *testing.T) {
 	wg := sync.WaitGroup{}
 	sample := "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"
-	for i := 2; i < len(sample); i++ {
-		d := []byte(random(256))
-		wg.Add(1)
-		func(n int, d []byte) {
-			enc := NewEncoding(sample[:n])
-			to := enc.EncodeToString(d)
-			assert.Equal(t, d, enc.DecodeString(to))
-			//println(fmt.Sprintf("base%d expend ratio %.4f", n, float64(len(to))/float64(len(d))))
-			wg.Done()
-		}(i, d)
+	for c := 0; c < 10; c++ {
+		for i := 2; i < len(sample); i++ {
+			d := []byte(random(256))
+			wg.Add(1)
+			func(n int, d []byte) {
+				enc := NewEncoding(sample[:n])
+				to := enc.EncodeToString(d)
+				assert.Equal(t, d, enc.DecodeString(to))
+				//println(fmt.Sprintf("base%d expend ratio %.4f", n, float64(len(to))/float64(len(d))))
+				wg.Done()
+			}(i, d)
+		}
 	}
 
 	wg.Wait()
