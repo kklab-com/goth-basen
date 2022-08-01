@@ -18,8 +18,8 @@ func TestBase62(t *testing.T) {
 		func(d []byte, i int) {
 			assert.Equal(t, d, SafeEncoding.DecodeString(SafeEncoding.EncodeToString(d)))
 			assert.Equal(t, d, SafeFlipEncoding.DecodeString(SafeFlipEncoding.EncodeToString(d)))
-			assert.Equal(t, d, SafeShiftEncoding.DecodeString(SafeShiftEncoding.EncodeToString(d)))
-			assert.Equal(t, d, SafeFlipShiftEncoding.DecodeString(SafeFlipShiftEncoding.EncodeToString(d)))
+			assert.Equal(t, d, ShiftEncoding.DecodeString(ShiftEncoding.EncodeToString(d)))
+			assert.Equal(t, d, FlipShiftEncoding.DecodeString(FlipShiftEncoding.EncodeToString(d)))
 			wg.Done()
 		}(d, i)
 	}
